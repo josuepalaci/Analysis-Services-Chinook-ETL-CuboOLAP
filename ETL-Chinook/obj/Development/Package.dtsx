@@ -1,0 +1,2906 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/19/2020 10:26:51 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="JFRECCSS"
+  DTS:CreatorName="JFRECCSS\josue"
+  DTS:DTSID="{75ABA484-F871-44EF-A8AA-A709575461CF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.132"
+  DTS:LocaleID="17418"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{C6499D29-C83F-4286-903D-5E596B596329}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Limpia el DW"
+      DTS:DTSID="{B760E6C5-7954-4D98-9D99-53EFE37AFE90}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4930C972-27DF-4F05-AAB7-ABB30FD2718B}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="DELETE FROM DimCustomer;&#xA;DELETE FROM DimInvoice;&#xA;DELETE FROM DimDateInvoice;&#xA;DELETE FROM DimTrack;&#xA;DELETE FROM FactInvoice;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DimCustomer"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{982b21c8-d50f-46ea-b187-bd945838dea1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DimCustomer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DimCustomer\Chinook"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Chinook"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Customer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimCustomer\Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{F5B8FF65-F15B-4F06-93A5-D87ACE6ED136}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="20"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Company]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Company]"
+                      length="80"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Company]"
+                      name="Company"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      length="70"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Address]"
+                      name="Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[PostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[PostalCode]"
+                      length="10"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[PostalCode]"
+                      name="PostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      length="24"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Phone]"
+                      name="Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Fax]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Fax]"
+                      length="24"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Fax]"
+                      name="Fax"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="60"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[SupportRepId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[SupportRepId]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[SupportRepId]"
+                      name="SupportRepId"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="40"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="20"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Company]"
+                      dataType="wstr"
+                      length="80"
+                      name="Company" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="70"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="40"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="40"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="40"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[PostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="PostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="24"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Fax]"
+                      dataType="wstr"
+                      length="24"
+                      name="Fax" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="60"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].ExternalColumns[SupportRepId]"
+                      dataType="i4"
+                      name="SupportRepId" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i4"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Company]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Company]"
+                      name="Company" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      dataType="wstr"
+                      length="70"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      name="Address" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[PostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[PostalCode]"
+                      name="PostalCode" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      dataType="wstr"
+                      length="24"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      name="Phone" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Fax]"
+                      dataType="wstr"
+                      length="24"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Fax]"
+                      name="Fax" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[SupportRepId]"
+                      dataType="i4"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[SupportRepId]"
+                      name="SupportRepId" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimCustomer\DW-Chinook"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW-Chinook"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimCustomer\DW-Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{4930C972-27DF-4F05-AAB7-ABB30FD2718B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DW_Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[firstName]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[lastName]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[CustomerId]"
+                      cachedDataType="i4"
+                      cachedName="CustomerId"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_customer]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].Columns[Address]"
+                      cachedDataType="wstr"
+                      cachedLength="70"
+                      cachedName="Address"
+                      externalMetadataColumnId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[adress]"
+                      lineageId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output].Columns[Address]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_customer]"
+                      dataType="i4"
+                      name="id_customer" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[firstName]"
+                      dataType="wstr"
+                      length="40"
+                      name="firstName" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[lastName]"
+                      dataType="wstr"
+                      length="20"
+                      name="lastName" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[adress]"
+                      dataType="wstr"
+                      length="70"
+                      name="adress" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      dataType="wstr"
+                      length="40"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      dataType="wstr"
+                      length="40"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="40"
+                      name="country" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimCustomer\DW-Chinook.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimCustomer\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimCustomer\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimCustomer\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DimCustomer.Paths[OLE DB Source Output]"
+              endId="Package\DimCustomer\DW-Chinook.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DimCustomer\Chinook.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DimDateInvoice"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A494B5CF-16DC-4273-8B90-27FA409593BC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DimDateInvoice"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DimDateInvoice\Chinook"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Chinook"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[View_Date]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimDateInvoice\Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{F5B8FF65-F15B-4F06-93A5-D87ACE6ED136}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[id_date]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[id_date]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[id_date]"
+                      name="id_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[year]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[year]"
+                      name="year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[quarter]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[quarter]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[quarter]"
+                      name="quarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[monthNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[monthNumber]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[monthNumber]"
+                      name="monthNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[monthName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[monthName]"
+                      length="30"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[monthName]"
+                      name="monthName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[weekNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[weekNumber]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[weekNumber]"
+                      name="weekNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[weekdayName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[weekdayName]"
+                      length="30"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[weekdayName]"
+                      name="weekdayName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[dayNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[dayNumber]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[dayNumber]"
+                      name="dayNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[id_date]"
+                      dataType="i4"
+                      name="id_date" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[year]"
+                      dataType="i4"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[quarter]"
+                      dataType="i4"
+                      name="quarter" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[monthNumber]"
+                      dataType="i4"
+                      name="monthNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[monthName]"
+                      dataType="wstr"
+                      length="30"
+                      name="monthName" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[weekNumber]"
+                      dataType="i4"
+                      name="weekNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[weekdayName]"
+                      dataType="wstr"
+                      length="30"
+                      name="weekdayName" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[dayNumber]"
+                      dataType="i4"
+                      name="dayNumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[id_date]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[id_date]"
+                      name="id_date" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[year]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[year]"
+                      name="year" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[quarter]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[quarter]"
+                      name="quarter" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[monthNumber]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[monthNumber]"
+                      name="monthNumber" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[monthName]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[monthName]"
+                      name="monthName" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[weekNumber]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[weekNumber]"
+                      name="weekNumber" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[weekdayName]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[weekdayName]"
+                      name="weekdayName" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[dayNumber]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[dayNumber]"
+                      name="dayNumber" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimDateInvoice\DW-Chinook"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW-Chinook"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimDateInvoice]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimDateInvoice\DW-Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{4930C972-27DF-4F05-AAB7-ABB30FD2718B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DW_Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[id_date]"
+                      cachedDataType="i4"
+                      cachedName="id_date"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_date]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[id_date]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[year]"
+                      cachedDataType="i4"
+                      cachedName="year"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[year]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[quarter]"
+                      cachedDataType="i4"
+                      cachedName="quarter"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[quarter]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[quarter]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[monthNumber]"
+                      cachedDataType="i4"
+                      cachedName="monthNumber"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[monthNumber]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[monthNumber]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[monthName]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="monthName"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[monthName]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[monthName]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[weekNumber]"
+                      cachedDataType="i4"
+                      cachedName="weekNumber"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[weekNumber]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[weekNumber]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[weekdayName]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="weekdayName"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[weekdayName]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[weekdayName]" />
+                    <inputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[dayNumber]"
+                      cachedDataType="i4"
+                      cachedName="dayNumber"
+                      externalMetadataColumnId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[dayNumber]"
+                      lineageId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output].Columns[dayNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_date]"
+                      dataType="i4"
+                      name="id_date" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      dataType="i4"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[quarter]"
+                      dataType="i4"
+                      name="quarter" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[monthNumber]"
+                      dataType="i4"
+                      name="monthNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[monthName]"
+                      dataType="wstr"
+                      length="50"
+                      name="monthName" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[weekNumber]"
+                      dataType="i4"
+                      name="weekNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[weekdayName]"
+                      dataType="wstr"
+                      length="50"
+                      name="weekdayName" />
+                    <externalMetadataColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[dayNumber]"
+                      dataType="i4"
+                      name="dayNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimDateInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimDateInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimDateInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DimDateInvoice.Paths[OLE DB Source Output]"
+              endId="Package\DimDateInvoice\DW-Chinook.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DimDateInvoice\Chinook.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DimInvoice"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6121fefe-90e5-4b01-8322-ba95ec669d7a}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DimInvoice"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DimInvoice\Chinook"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Chinook"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Invoice]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimInvoice\Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{F5B8FF65-F15B-4F06-93A5-D87ACE6ED136}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceId]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceId]"
+                      name="InvoiceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                      name="InvoiceDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingAddress]"
+                      length="70"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingAddress]"
+                      name="BillingAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingCity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingCity]"
+                      length="40"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingCity]"
+                      name="BillingCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingState]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingState]"
+                      length="40"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingState]"
+                      name="BillingState"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingCountry]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingCountry]"
+                      length="40"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingCountry]"
+                      name="BillingCountry"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingPostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingPostalCode]"
+                      length="10"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingPostalCode]"
+                      name="BillingPostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[Total]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Total]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[Total]"
+                      name="Total"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceId]"
+                      dataType="i4"
+                      name="InvoiceId" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                      dataType="dbTimeStamp"
+                      name="InvoiceDate" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingAddress]"
+                      dataType="wstr"
+                      length="70"
+                      name="BillingAddress" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingCity]"
+                      dataType="wstr"
+                      length="40"
+                      name="BillingCity" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingState]"
+                      dataType="wstr"
+                      length="40"
+                      name="BillingState" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingCountry]"
+                      dataType="wstr"
+                      length="40"
+                      name="BillingCountry" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[BillingPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="BillingPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Total]"
+                      dataType="numeric"
+                      name="Total"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceId]"
+                      dataType="i4"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceId]"
+                      name="InvoiceId" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i4"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                      name="InvoiceDate" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingAddress]"
+                      dataType="wstr"
+                      length="70"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingAddress]"
+                      name="BillingAddress" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingCity]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingCity]"
+                      name="BillingCity" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingState]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingState]"
+                      name="BillingState" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingCountry]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingCountry]"
+                      name="BillingCountry" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[BillingPostalCode]"
+                      name="BillingPostalCode" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[Total]"
+                      dataType="numeric"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[Total]"
+                      name="Total"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimInvoice\DW-Chinook"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW-Chinook"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimInvoice]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimInvoice\DW-Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{4930C972-27DF-4F05-AAB7-ABB30FD2718B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DW_Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[BillingAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="70"
+                      cachedName="BillingAddress"
+                      externalMetadataColumnId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingAddress]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingAddress]" />
+                    <inputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[BillingCity]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="BillingCity"
+                      externalMetadataColumnId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingCity]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingCity]" />
+                    <inputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[BillingState]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="BillingState"
+                      externalMetadataColumnId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingState]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingState]" />
+                    <inputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[BillingCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="BillingCountry"
+                      externalMetadataColumnId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingCountry]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[BillingCountry]" />
+                    <inputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[Total]"
+                      cachedDataType="numeric"
+                      cachedName="Total"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[total]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[Total]" />
+                    <inputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[InvoiceId]"
+                      cachedDataType="i4"
+                      cachedName="InvoiceId"
+                      externalMetadataColumnId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_invoice]"
+                      lineageId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_invoice]"
+                      dataType="i4"
+                      name="id_invoice" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingAddress]"
+                      dataType="wstr"
+                      length="70"
+                      name="BillingAddress" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingCity]"
+                      dataType="wstr"
+                      length="40"
+                      name="BillingCity" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingState]"
+                      dataType="wstr"
+                      length="40"
+                      name="BillingState" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[BillingCountry]"
+                      dataType="wstr"
+                      length="40"
+                      name="BillingCountry" />
+                    <externalMetadataColumn
+                      refId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[total]"
+                      dataType="numeric"
+                      name="total"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DimInvoice.Paths[OLE DB Source Output]"
+              endId="Package\DimInvoice\DW-Chinook.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DimInvoice\Chinook.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DimTrack"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ab321189-9c4c-4780-90fb-b70adeaa3533}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DimTrack"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DimTrack\Chinook"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Chinook"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[View_Track]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimTrack\Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{F5B8FF65-F15B-4F06-93A5-D87ACE6ED136}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[id_track]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[id_track]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[id_track]"
+                      name="id_track"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      length="200"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[album]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[album]"
+                      length="160"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[album]"
+                      name="album"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[genero]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[genero]"
+                      length="120"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[genero]"
+                      name="genero"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[Composer]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Composer]"
+                      length="220"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[Composer]"
+                      name="Composer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[artist]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[artist]"
+                      length="120"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[artist]"
+                      name="artist"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[unitePrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[unitePrice]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[unitePrice]"
+                      name="unitePrice"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[id_track]"
+                      dataType="i4"
+                      name="id_track" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[album]"
+                      dataType="wstr"
+                      length="160"
+                      name="album" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[genero]"
+                      dataType="wstr"
+                      length="120"
+                      name="genero" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Composer]"
+                      dataType="wstr"
+                      length="220"
+                      name="Composer" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[artist]"
+                      dataType="wstr"
+                      length="120"
+                      name="artist" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].ExternalColumns[unitePrice]"
+                      dataType="numeric"
+                      name="unitePrice"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[id_track]"
+                      dataType="i4"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[id_track]"
+                      name="id_track" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[album]"
+                      dataType="wstr"
+                      length="160"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[album]"
+                      name="album" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[genero]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[genero]"
+                      name="genero" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[Composer]"
+                      dataType="wstr"
+                      length="220"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[Composer]"
+                      name="Composer" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[artist]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[artist]"
+                      name="artist" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[unitePrice]"
+                      dataType="numeric"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[unitePrice]"
+                      name="unitePrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DimTrack\DW-Chinook"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW-Chinook"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimTrack]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DimTrack\DW-Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{4930C972-27DF-4F05-AAB7-ABB30FD2718B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DW_Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[id_track]"
+                      cachedDataType="i4"
+                      cachedName="id_track"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_track]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[id_track]" />
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[album]"
+                      cachedDataType="wstr"
+                      cachedLength="160"
+                      cachedName="album"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[album]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[album]" />
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[genero]"
+                      cachedDataType="wstr"
+                      cachedLength="120"
+                      cachedName="genero"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[genero]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[genero]" />
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[Composer]"
+                      cachedDataType="wstr"
+                      cachedLength="220"
+                      cachedName="Composer"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[composer]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[Composer]" />
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[artist]"
+                      cachedDataType="wstr"
+                      cachedLength="120"
+                      cachedName="artist"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[artist]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[artist]" />
+                    <inputColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].Columns[unitePrice]"
+                      cachedDataType="numeric"
+                      cachedName="unitePrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[unitePrice]"
+                      lineageId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output].Columns[unitePrice]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_track]"
+                      dataType="i4"
+                      name="id_track" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="200"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[album]"
+                      dataType="wstr"
+                      length="160"
+                      name="album" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[genero]"
+                      dataType="wstr"
+                      length="120"
+                      name="genero" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[artist]"
+                      dataType="wstr"
+                      length="120"
+                      name="artist" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[composer]"
+                      dataType="wstr"
+                      length="220"
+                      name="composer" />
+                    <externalMetadataColumn
+                      refId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[unitePrice]"
+                      dataType="numeric"
+                      name="unitePrice"
+                      precision="10"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DimTrack\DW-Chinook.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DimTrack\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DimTrack\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DimTrack\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DimTrack\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DimTrack.Paths[OLE DB Source Output]"
+              endId="Package\DimTrack\DW-Chinook.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DimTrack\Chinook.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FactInvoice"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0f33ac18-bab9-41de-85c4-679acadd4bd1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FactInvoice"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FactInvoice\Chinook"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Chinook"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[View_Invoice_fact]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactInvoice\Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{F5B8FF65-F15B-4F06-93A5-D87ACE6ED136}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceLineId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceLineId]"
+                      name="InvoiceLineId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceId]"
+                      name="InvoiceId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[TrackId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[TrackId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[TrackId]"
+                      name="TrackId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[dateId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[dateId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[dateId]"
+                      name="dateId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineId]"
+                      dataType="i4"
+                      name="InvoiceLineId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[InvoiceId]"
+                      dataType="i4"
+                      name="InvoiceId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[TrackId]"
+                      dataType="i4"
+                      name="TrackId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[dateId]"
+                      dataType="i4"
+                      name="dateId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="i4"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="numeric"
+                      name="UnitPrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      dataType="i4"
+                      name="Quantity" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceLineId]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceLineId]"
+                      name="InvoiceLineId" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceId]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[InvoiceId]"
+                      name="InvoiceId" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[TrackId]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[TrackId]"
+                      name="TrackId" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[dateId]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[dateId]"
+                      name="dateId" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="numeric"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactInvoice\DW-Chinook"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW-Chinook"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactInvoice]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactInvoice\DW-Chinook.Connections[OleDbConnection]"
+                  connectionManagerID="{4930C972-27DF-4F05-AAB7-ABB30FD2718B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DW_Chinook]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[InvoiceId]"
+                      cachedDataType="i4"
+                      cachedName="InvoiceId"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[invoiceId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceId]" />
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[TrackId]"
+                      cachedDataType="i4"
+                      cachedName="TrackId"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[trackId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[TrackId]" />
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[dateId]"
+                      cachedDataType="i4"
+                      cachedName="dateId"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[dateId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[dateId]" />
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[CustomerId]"
+                      cachedDataType="i4"
+                      cachedName="CustomerId"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[customerId]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                      cachedDataType="i4"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedDataType="numeric"
+                      cachedName="UnitPrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[unit_price]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].Columns[InvoiceLineId]"
+                      cachedDataType="i4"
+                      cachedName="InvoiceLineId"
+                      externalMetadataColumnId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_invoice_line]"
+                      lineageId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output].Columns[InvoiceLineId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[dateId]"
+                      dataType="i4"
+                      name="dateId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[customerId]"
+                      dataType="i4"
+                      name="customerId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[invoiceId]"
+                      dataType="i4"
+                      name="invoiceId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[trackId]"
+                      dataType="i4"
+                      name="trackId" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[unit_price]"
+                      dataType="numeric"
+                      name="unit_price"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                      dataType="i4"
+                      name="quantity" />
+                    <externalMetadataColumn
+                      refId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input].ExternalColumns[id_invoice_line]"
+                      dataType="i4"
+                      name="id_invoice_line" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactInvoice\DW-Chinook.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FactInvoice.Paths[OLE DB Source Output]"
+              endId="Package\FactInvoice\DW-Chinook.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\FactInvoice\Chinook.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{D5E169AE-EBE6-40D7-8AA5-CF8744064A86}"
+      DTS:From="Package\Clean"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\DimDateInvoice" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0AD42874-5FBD-4E35-BE39-20EED51B4BA8}"
+      DTS:From="Package\DimDateInvoice"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\DimTrack" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{6E7E90C2-1D3F-4F07-9D90-E776DDE5B963}"
+      DTS:From="Package\DimTrack"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 2"
+      DTS:To="Package\DimCustomer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{C2B0C5FF-88F3-4C8F-B55A-07F84C9AF8E2}"
+      DTS:From="Package\DimCustomer"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 3"
+      DTS:To="Package\DimInvoice" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{B42EF285-7CE8-48B7-A549-5D2EE3A977B5}"
+      DTS:From="Package\DimInvoice"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 4"
+      DTS:To="Package\FactInvoice" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="105,42"
+          Id="Package\Clean"
+          TopLeft="214,58" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\DimDateInvoice"
+          TopLeft="386,60" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="319,80">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67,0"
+              Start="0,0"
+              End="59.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="59.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="124,42"
+          Id="Package\DimTrack"
+          TopLeft="404,132" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\DimCustomer"
+          TopLeft="397,203" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\FactInvoice"
+          TopLeft="609,273" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="464.5,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 2]"
+          TopLeft="467.25,174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="132,42"
+          Id="Package\DimInvoice"
+          TopLeft="400,270" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 3]"
+          TopLeft="467.25,245">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 4]"
+          TopLeft="532,292.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="77,0"
+              Start="0,0"
+              End="69.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="69.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DimDateInvoice">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\DimDateInvoice\DW-Chinook"
+          TopLeft="569,87" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\DimDateInvoice\Chinook"
+          TopLeft="329,84" />
+        <EdgeLayout
+          Id="Package\DimDateInvoice.Paths[OLE DB Source Output]"
+          TopLeft="446,106.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="123,0"
+              Start="0,0"
+              End="115.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="115.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimDateInvoice\DW-Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimDateInvoice\Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DimTrack">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\DimTrack\DW-Chinook"
+          TopLeft="608,84" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\DimTrack\Chinook"
+          TopLeft="329,84" />
+        <EdgeLayout
+          Id="Package\DimTrack.Paths[OLE DB Source Output]"
+          TopLeft="446,105">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="162,0"
+              Start="0,0"
+              End="154.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="154.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimTrack\DW-Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimTrack\Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DimCustomer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\DimCustomer\DW-Chinook"
+          TopLeft="558,84" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\DimCustomer\Chinook"
+          TopLeft="329,84" />
+        <EdgeLayout
+          Id="Package\DimCustomer.Paths[OLE DB Source Output]"
+          TopLeft="446,105">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="112,0"
+              Start="0,0"
+              End="104.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="104.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimCustomer\DW-Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimCustomer\Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\FactInvoice">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\FactInvoice\DW-Chinook"
+          TopLeft="631,85" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\FactInvoice\Chinook"
+          TopLeft="336,84" />
+        <EdgeLayout
+          Id="Package\FactInvoice.Paths[OLE DB Source Output]"
+          TopLeft="453,105.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="178,0"
+              Start="0,0"
+              End="170.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="170.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactInvoice\DW-Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactInvoice\Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DimInvoice">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\DimInvoice\DW-Chinook"
+          TopLeft="599,83" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\DimInvoice\Chinook"
+          TopLeft="329,84" />
+        <EdgeLayout
+          Id="Package\DimInvoice.Paths[OLE DB Source Output]"
+          TopLeft="446,104.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="153,0"
+              Start="0,0"
+              End="145.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="145.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimInvoice\DW-Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DimInvoice\Chinook">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
