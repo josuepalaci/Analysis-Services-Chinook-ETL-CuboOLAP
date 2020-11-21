@@ -61,7 +61,7 @@
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>zn0qNqDXvNNQ5txxaw+PRMUV+Ig=19/11/2020 11:54:3719/11/2020 11:26:53mz4pIMPCChxO4by+/GjdoX/0HbM=19/11/2020 11:26:5319/11/2020 11:26:53</TimeStamp>
+        <TimeStamp>PnrnJaHqrniZQK2Fs6qYlqamj5Q=19/11/2020 18:13:1319/11/2020 11:26:53mz4pIMPCChxO4by+/GjdoX/0HbM=19/11/2020 11:26:5319/11/2020 11:26:53</TimeStamp>
         <ID>
           <String>DW Chinook</String>
         </ID>
@@ -78,5 +78,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2020-11-19T18:08:23.663333Z</LastDeployed>
+  <LastDeployed>2020-11-20T22:59:22.173333Z</LastDeployed>
 </DeploymentSnapshot>
