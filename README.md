@@ -9,8 +9,7 @@ Este proyecto es una simple demostracion de como puede generarse un analisis de 
 
 ## Origen de Datos 
 
-Los datos usados provienen de la base de datos de prueba [Chinook](https://github.com/lerocha/chinook-database),
-esta es una base de datos de ejemplo sobre una tienda de venta de musica tiene soporte para direfentes gestores de base de datos como SQL Server, Oracle, MySQL, etc.
+Los datos usados provienen de la base de datos de prueba [Chinook - Version 1.4](https://github.com/lerocha/chinook-database),esta es una base de datos de ejemplo sobre una tienda de venta de musica tiene soporte para direfentes gestores de base de datos como SQL Server, Oracle, MySQL, etc.
 
 ## Desarrollo
 
@@ -22,13 +21,14 @@ Script de base de datos: [Chinook](./SQL/Chinook.sql).
 
 ### Diagrama Data Warehouse
 
-Script de Data Warehouse: [DW-Chinook](./SQL/DW-Chinook.sql).
-Script de Data Warehouse con Datos: [DW-Chinook-With-data](./SQL/DW-Chinook-FullData.sql).
+Script de Data Warehouse: [DW-Chinook-With-data](./SQL/DW-Chinook-FullData.sql).
 
 ![dw](./Capturas/diagramaDW.jpg)
 
-### Ejemplo de Reportes 
+### Ejemplo 
 
 En este reporte podemos ver las ventas por cada genero musical. 
 
 ![ventas genero](./Capturas/vg.jpg)
+
+Mas [Reportes](./Reportes/).
