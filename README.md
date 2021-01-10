@@ -9,7 +9,7 @@ Este proyecto es una simple demostracion de como puede generarse un analisis de 
 
 ## Origen de Datos 
 
-Los datos usados provienen de la base de datos de prueba [Chinook - Version 1.4](https://github.com/lerocha/chinook-database),esta es una base de datos de ejemplo sobre una tienda de venta de musica tiene soporte para direfentes gestores de base de datos como SQL Server, Oracle, MySQL, etc.
+Los datos usados provienen de la base de datos de prueba [Chinook - Version 1.4](https://github.com/lerocha/chinook-database), esta es una base de datos de ejemplo sobre una tienda de venta de musica tiene soporte para direfentes gestores de base de datos como SQL Server, Oracle, MySQL, etc.
 
 ## Desarrollo
 
